@@ -1,0 +1,375 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+<head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{% static '/img/fav.png' %}">
+    <!-- Author Meta -->
+    <meta name="author" content="codepixer">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>Feria Virtual</title>
+    <link rel="website icon" type="png" href="{% static 'img/minilogo.jpg' %}">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+        <!--
+        CSS
+        ============================================= -->
+        <link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
+        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+        <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">					
+        <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    </head>
+    <body>
+
+          <header id="header" id="home">
+            <div class="container">
+                <div class="row align-items-center justify-content-between d-flex">
+                  <div id="logo">
+                    <!-- <a href="index.html"><img src="{% static 'img/logo.png' %}" alt="" title="" /></a> -->
+                    <a> Logo </a>
+                  </div>
+                  <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                      <li class="menu-active"><a href="">Inicio</a></li>
+                      <li><a href="#">Sobre Nosotros</a></li>
+                      <li><a href="{% url 'productos_venta' %}">Categorias</a></li>
+                      <li><a href="{% url 'producto' %}">Productos</a></li>
+                      <li><a href="#">Contacto</a></li>
+                      <!-- <li class="menu-has-children"><a href="">Pages</a>
+                        <ul>
+                            <li><a href="elements.html">elements</a></li>
+                            <li><a href="search.html">search</a></li>
+                            <li><a href="single.html">single</a></li>
+                        </ul>
+                      </li> -->
+                      {% if user.is_authenticated %}
+                      <li><a class="ticker-btn" href="{% url 'logout' %}">Cerrar Sesion</a></li>
+                      {% else %}
+                      <li><a class="ticker-btn" href="{% url 'login' %}">Inicia Sesion</a></li>
+                      <li><a class="ticker-btn" href="{% url 'registrar' %}">Registrate</a></li>
+                      {% endif %}
+                      
+                    </ul>
+                  </nav><!-- #nav-menu-container -->		    		
+                </div>
+            </div>
+          </header><!-- #header -->
+
+
+        <!-- start banner Area -->
+        <section class="banner-area relative" id="home">	
+            <div class="overlay overlay-bg"></div>
+            <div class="container">
+                <div class="row fullscreen d-flex align-items-center justify-content-center">
+                    <div class="banner-content col-lg-12">
+                        <h1 class="text-white">
+                            <span>100+</span> Ofertas Cada Semana				
+                        </h1>	
+                        <form action="search.html" class="serach-form-area">
+                            <div class="row justify-content-center form-wrap">
+                                <div class="col-lg-4 form-cols">
+                                    <input type="text" class="form-control" name="search" placeholder="Que Buscas?">
+                                </div>
+                                <div class="col-lg-3 form-cols">
+                                    <div class="default-select" id="default-selects">
+                                        <select>
+                                            <option value="1">Regiones</option>
+                                            <option value="2">Metropolitana</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 form-cols">
+                                    <div class="default-select" id="default-selects2">
+                                        <select>
+                                            <option value="1">Categorias</option>
+                                            <option value="2">Fruta</option>
+                                            <option value="3">Verdura</option>
+                                        </select>
+                                    </div>										
+                                </div>
+                                <div class="col-lg-2 form-cols">
+                                    <button type="button" class="btn btn-info">
+                                      <span class="lnr lnr-magnifier"></span> Buscar
+                                    </button>
+                                </div>								
+                            </div>
+                        </form>	
+                    </div>											
+                </div>
+            </div>
+        </section>
+        <!-- End banner Area -->	
+
+        <!-- Start features Area -->
+        <section class="features-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single-feature">
+                            <h4>Confiable</h4>
+                            <p>
+                                Somos una empresa confiable para lo que necesitas.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single-feature">
+                            <h4>Rapida</h4>
+                            <p>
+                                Obtendrás productos a tiempo junto a un seguimiento de estos.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single-feature">
+                            <h4>Seguridad</h4>
+                            <p>
+                                Te garantizamos un envio respaldado con un seguro.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single-feature">
+                            <h4>Notificacion</h4>
+                            <p>
+                                Tendras notificaciones cada vez que tu pedido cambie de estado.
+                            </p>
+                        </div>
+                    </div>																		
+                </div>
+            </div>	
+        </section>
+        <!-- End features Area -->
+        
+        <!-- Start feature-cat Area -->
+        <section class="feature-cat-area pt-100" id="category">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="menu-content pb-60 col-lg-10">
+                        <div class="title text-center">
+                            <h1 class="mb-10">Destacamos por lo siguiente</h1>
+                            <p>Las empresas nos avalan por nuestra atencion.</p>
+                        </div>
+                    </div>
+                </div>						
+                <div class="row">
+                    <div class="col-lg-2 col-md-4 col-sm-6">
+                        <div class="single-fcat">
+                            <a href="category.html">
+                                <img src="{% static 'img/o1.png' %}" alt="">
+                            </a>
+                            <p>Seguridad</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-6">
+                        <div class="single-fcat">
+                            <a href="category.html">
+                                <img src="{% static 'img/o2.png' %}" alt="">
+                            </a>
+                            <p>Comentarios</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-6">
+                        <div class="single-fcat">
+                            <a href="category.html">
+                                <img src="{% static 'img/o3.png' %}" alt="">
+                            </a>
+                            <p>Innovador</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-6">
+                        <div class="single-fcat">
+                            <a href="category.html">
+                                <img src="{% static 'img/o4.png' %}" alt="">
+                            </a>
+                            <p>Reportes</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-6">
+                        <div class="single-fcat">
+                            <a href="category.html">
+                                <img src="{% static 'img/o5.png' %}" alt="">
+                            </a>
+                            <p>Atencion</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-6">
+                        <div class="single-fcat">
+                            <a href="category.html">
+                                <img src="{% static 'img/o6.png' %}" alt="">
+                            </a>
+                            <p>Seguimiento</p>
+                        </div>			
+                    </div>																											
+                </div>
+            </div>	
+        </section>
+        <!-- End feature-cat Area -->
+        
+        <!-- Start post Area -->
+        <section class="post-area section-gap">
+            <div class="container">
+                <div class="row justify-content-center d-flex">
+                    <div class="col-lg-8 post-list">
+                        <div class="single-post d-flex flex-row">
+                            <div class="thumb">
+                                <img src="{% static 'img/post.png' %}" alt="">
+                                <ul class="tags">
+                                    <li>
+                                        <a href="#">Fruta</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="details">
+                                <div class="title d-flex flex-row justify-content-between">
+                                    <div class="titles">
+                                        <a href="single.html"><h4>Manzanas Fuji</h4></a>					
+                                    </div>
+                                    <ul class="btns">
+                                        <li><a href="#"><span class="lnr lnr-heart"></span></a></li>
+                                        <li><a href="#">Ofertar</a></li>
+                                    </ul>
+                                </div>
+                                <p>
+                                    1 Tonelada de manzanas Fuji, calidad premium
+                                </p>
+                                <h5>Job Nature: Full time</h5>
+                                <p class="address"><span class="lnr lnr-map"></span> Melipilla, Region Metropolitana</p>
+                                <p class="address"><span class="lnr lnr-database"></span> Ofertar</p>
+                            </div>
+                        </div>
+                        <a class="text-uppercase loadmore-btn mx-auto d-block" href="category.html">Cargar Mas Post</a>
+
+                    </div>
+                    <div class="col-lg-4 sidebar">
+
+                        <div class="single-slidebar">
+                            <h4>Categoria de Frutas</h4>
+                            <ul class="cat-list">
+                                <li><a class="justify-content-between d-flex" href="category.html"><p>Manzana</p></a></li>
+                                <li><a class="justify-content-between d-flex" href="category.html"><p>Peras</p></a></li>
+                                <li><a class="justify-content-between d-flex" href="category.html"><p>Sandias</p></a></li>
+                                <li><a class="justify-content-between d-flex" href="category.html"><p>Melones</p></a></li>
+                                <li><a class="justify-content-between d-flex" href="category.html"><p>Arandanos</p></a></li>
+                                <li><a class="justify-content-between d-flex" href="category.html"><p>Frambuesas</p></a></li>
+                                <li><a class="justify-content-between d-flex" href="category.html"><p>Otros</p></a></li>
+                            </ul>
+                        </div>							
+                    </div>
+                </div>
+            </div>	
+        </section>
+        <!-- End post Area -->
+            
+
+        <!-- Start callto-action Area -->
+        <section class="callto-action-area section-gap" id="join">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="menu-content col-lg-9">
+                        <div class="title text-center">
+                            <h1 class="mb-10 text-white">Unete a Nosotros</h1>
+                            <p class="text-white">Se parte de nuestra gran cantidad de personas que necesitan vender sus productos o comprarlos, decide tu si quieres ser Proveedor o Comprador</p>
+                            <a class="primary-btn" href="#">Quiero ser Proveedor</a>
+                            <a class="primary-btn" href="#">Quiero ser Comprador</a>
+                        </div>
+                    </div>
+                </div>	
+            </div>	
+        </section>
+        <!-- End calto-action Area -->
+    
+        <!-- start footer Area -->		
+        <footer class="footer-area section-gap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3  col-md-12">
+                        <div class="single-footer-widget">
+                            <h6>Calidad de Fruta</h6>
+                            <ul class="footer-nav">
+                                <li><a href="#">Premium</a></li>
+                                <li><a href="#">Sabor</a></li>
+                                <li><a href="#">Precio</a></li>
+                                <li><a href="#">Tamaño</a></li>
+                                <li><a href="#">Marca</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6  col-md-12">
+                        <div class="single-footer-widget newsletter">
+                            <h6>Inscribete</h6>
+                            <p>Inscribete a nosotros y recibiras mas informacion sobre lo que necesites.</p>
+                            <div id="mc_embed_signup">
+                                <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
+
+                                    <div class="form-group row" style="width: 100%">
+                                        <div class="col-lg-8 col-md-12">
+                                            <input name="EMAIL" placeholder="Ingresa Tu Correo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresa Tu Correo '" required="" type="email">
+                                            <div style="position: absolute; left: -5000px;">
+                                                <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+                                            </div>
+                                        </div> 
+                                    
+                                        <div class="col-lg-4 col-md-12">
+                                            <button class="nw-btn primary-btn">Subscribete<span class="lnr lnr-arrow-right"></span></button>
+                                        </div> 
+                                    </div>		
+                                    <div class="info"></div>
+                                </form>
+                            </div>		
+                        </div>
+                    </div>
+                    <div class="col-lg-3  col-md-12">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13278.028161000853!2d-71.20425025!3d-33.695826499999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x966255eae610cb2f%3A0xc3fdb55ead51065b!2sDuoc%20UC%3A%20Sede%20Melipilla!5e0!3m2!1ses-419!2scl!4v1666823739686!5m2!1ses-419!2scl" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>						
+                </div>
+
+                <div class="row footer-bottom d-flex justify-content-between">
+                    <p class="col-lg-8 col-sm-12 footer-text m-0 text-white">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Todos los derechos reservados por TPS.
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                    <div class="col-lg-4 col-sm-12 footer-social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End footer Area -->		
+
+        <script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>			
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+          <script src="{% static 'js/easing.min.js' %}"></script>			
+        <script src="{% static 'js/hoverIntent.js' %}"></script>
+        <script src="{% static 'js/superfish.min.js' %}"></script>	
+        <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+        <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>	
+        <script src="{% static 'js/owl.carousel.min.js' %}"></script>			
+        <script src="{% static 'js/jquery.sticky.js' %}"></script>
+        <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>			
+        <script src="{% static 'js/parallax.min.js' %}"></script>		
+        <script src="{% static 'js/mail-script.js' %}"></script>	
+        <script src="{% static 'js/main.js' %}"></script>	
+    </body>
+</html>
+
+
+
