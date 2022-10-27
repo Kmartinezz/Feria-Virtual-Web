@@ -1,0 +1,225 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{% static '/img/fav.png' %}">
+    <!-- Author Meta -->
+    <meta name="author" content="codepixer">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>Feria Virtual</title>
+    <link rel="website icon" type="png" href="{% static 'img/minilogo.jpg' %}">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+    <!--
+        CSS
+        ============================================= -->
+    <link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+
+<body>
+
+    <header id="header" id="home">
+        <div class="container">
+            <div class="row align-items-center justify-content-between d-flex">
+                <div id="logo">
+                    <!-- <a href="index.html"><img src="{% static 'img/logo.png' %}" alt="" title="" /></a> -->
+                    <a> Logo </a>
+                </div>
+                <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                        <li class="menu-active"><a href="{% url 'index' %}">Inicio</a></li>
+                        <li><a href="#">Sobre Nosotros</a></li>
+                        <!-- <li><a href="{% url 'productos_venta' %}">Categorias</a></li> -->
+                        <li><a href="{% url 'listarProducto' %}">MarketPlace</a></li>
+                        <li><a href="#">Contacto</a></li>
+                        <!-- <li class="menu-has-children"><a href="">Pages</a>
+                        <ul>
+                            <li><a href="elements.html">elements</a></li>
+                            <li><a href="search.html">search</a></li>
+                            <li><a href="single.html">single</a></li>
+                        </ul>
+                      </li> -->
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'registrarproducto' %}">Registrar Producto</a></li>
+                        <li><a class="ticker-btn" href="{% url 'logout' %}">Cerrar Sesion</a></li>
+                        {% else %}
+                        <li><a class="ticker-btn" href="{% url 'login' %}">Inicia Sesion</a></li>
+                        <li><a class="ticker-btn" href="{% url 'registrar' %}">Registrate</a></li>
+                        {% endif %}
+
+                    </ul>
+                </nav><!-- #nav-menu-container -->
+            </div>
+        </div>
+    </header><!-- #header -->
+
+    <!-- start banner Area -->
+    <section class="banner-area relative" id="home">
+        <div class="overlay overlay-bg"></div>
+        <div class="container">
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="about-content col-lg-12">
+                    <h1 class="text-white">
+                        Solicitar Producto
+                    </h1>
+                    <p class="text-white link-nav"><a href="{% url 'index' %}">Inicio </a> <span
+                            class="lnr lnr-arrow-right"></span> <a href="#"> Solicitar Producto</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End banner Area -->
+
+    <!-- Start contact-page Area -->
+    <section class="contact-page-area section-gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 d-flex flex-column">
+                    <a class="contact-btns" href="#">Hazlo de Forma Facil</a>
+                    <a class="contact-btns" href="#">Sin Apuros</a>
+                    <a class="contact-btns" href="#">Espera que te notifiquemos</a>
+                </div>
+                <div class="col-lg-8">
+                    <form class="form-area " id="myForm" action="mail.php" method="post"
+                        class="contact-form text-right">
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <input name="nombre_producto" placeholder="Nombre Producto" onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Nombre Producto'"
+                                    class="common-input mb-20 form-control" required="" type="text">
+
+                                <input name="comuna" placeholder="Comuna" onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Comuna'"
+                                    class="common-input mb-20 form-control" required="" type="text">
+
+                                <input name="email" placeholder="Ingresa Tu Correo"
+                                    pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresa Tu Correo'"
+                                    class="common-input mb-20 form-control" required="" type="email">
+
+                                <input name="fecha_cierre" placeholder="Fecha Termino Oferta" onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Fecha Termino Oferta'"
+                                    class="common-input mb-20 form-control" required="" type="date">
+
+                                <textarea class="common-textarea mt-10 form-control" name="solicitud"
+                                    placeholder="Escribe aqui lo que necesitas" onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Escribe aqui lo que necesitas'" required=""></textarea>
+
+                                <button class="primary-btn mt-20 text-white" style="float: right;">Enviar Solicitud</button>
+                                <div class="mt-20 alert-msg" style="text-align: left;"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End contact-page Area -->
+
+
+    <!-- start footer Area -->
+    <footer class="footer-area section-gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3  col-md-12">
+                    <div class="single-footer-widget">
+                        <h6>Calidad de Fruta</h6>
+                        <ul class="footer-nav">
+                            <li><a href="#">Premium</a></li>
+                            <li><a href="#">Sabor</a></li>
+                            <li><a href="#">Precio</a></li>
+                            <li><a href="#">Tamaño</a></li>
+                            <li><a href="#">Marca</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6  col-md-12">
+                    <div class="single-footer-widget newsletter">
+                        <h6>Inscribete</h6>
+                        <p>Inscribete a nosotros y recibiras mas informacion sobre lo que necesites.</p>
+                        <div id="mc_embed_signup">
+                            <form target="_blank" novalidate="true"
+                                action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                                method="get" class="form-inline">
+
+                                <div class="form-group row" style="width: 100%">
+                                    <div class="col-lg-8 col-md-12">
+                                        <input name="EMAIL" placeholder="Ingresa Tu Correo"
+                                            onfocus="this.placeholder = ''"
+                                            onblur="this.placeholder = 'Ingresa Tu Correo '" required="" type="email">
+                                        <div style="position: absolute; left: -5000px;">
+                                            <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value=""
+                                                type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-12">
+                                        <button class="nw-btn primary-btn">Subscribete<span
+                                                class="lnr lnr-arrow-right"></span></button>
+                                    </div>
+                                </div>
+                                <div class="info"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3  col-md-12">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13278.028161000853!2d-71.20425025!3d-33.695826499999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x966255eae610cb2f%3A0xc3fdb55ead51065b!2sDuoc%20UC%3A%20Sede%20Melipilla!5e0!3m2!1ses-419!2scl!4v1666823739686!5m2!1ses-419!2scl"
+                        width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+
+            <div class="row footer-bottom d-flex justify-content-between">
+                <p class="col-lg-8 col-sm-12 footer-text m-0 text-white">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Todos los derechos reservados por TPS.
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+                <div class="col-lg-4 col-sm-12 footer-social">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-youtube-play"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End footer Area -->
+
+    <script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+    <script src="{% static 'js/easing.min.js' %}"></script>
+    <script src="{% static 'js/hoverIntent.js' %}"></script>
+    <script src="{% static 'js/superfish.min.js' %}"></script>
+    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.sticky.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/parallax.min.js' %}"></script>
+    <script src="{% static 'js/mail-script.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>

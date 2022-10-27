@@ -12,7 +12,7 @@ class Cliente(models.Model):
 class productor(models.Model):
     productos = models.CharField(max_length=20, blank=False, null=False)
     precio = models.CharField(max_length=20, blank=False, null=False)
-    cantidad = models.IntegerField(max_length=10)
+    cantidad = models.IntegerField()
     calidad = models.CharField(max_length=20, blank=False, null=False)
 
 
@@ -22,7 +22,7 @@ class Productos(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     fotografia = models.CharField(max_length=200, blank=False, null=False)
     precio = models.IntegerField()
-    cantidad = models.IntegerField(max_length=10)
+    cantidad = models.IntegerField()
     estado = models.CharField(max_length=10, choices=Estado)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
@@ -33,3 +33,9 @@ class Productos(models.Model):
 
     def __str__(self):
         return self.estado
+
+class ProductosVenta(models.Model):
+    nombre = models.CharField(max_length = 75)
+    solicitud = models.CharField(max_length = 200)
+    cierre_oferta = models.DateField()
+    comuna = models.CharField(max_length = 30)

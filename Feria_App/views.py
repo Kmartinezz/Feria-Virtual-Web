@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
 from django.contrib.auth import login, authenticate
 from Feria_App.forms import RegistrarForm
-from Feria_App.models import Productos, productor
+from Feria_App.models import Productos, productor, ProductosVenta
 
 
 # Create your views here.
@@ -16,6 +16,12 @@ def index (request):
 
 def index2(request):
     return render(request, 'index2.html')
+
+def SolicitarProducto(request):
+    return render(request, 'SolicitarProducto.html')
+
+def RegistrarProducto(request):
+    return render(request, 'RegistrarProducto.html')
 
 class FormularioClienteView(HttpRequest):
 
@@ -52,11 +58,6 @@ class FormularioProductorView(HttpRequest):
         producto = productor.objects.all()
         return render(request, 'Productos.html',{'producto':producto})
 
-
-
-
-
-
 def Registrar(request):
     if request.method == 'POST':
         form = RegistrarForm(request.POST)
@@ -71,3 +72,7 @@ def Registrar(request):
         form = RegistrarForm()
     return render(request, 'registrar.html', {'form': form})
     
+def listar_productos(request):
+    productos = ProductosVenta.objects.all()
+    return render(request, "ListarProductos.html", {"productos": productos})
+

@@ -17,5 +17,8 @@ urlpatterns = [
     path('producto', views.FormularioProductorView.listarProductos, name='producto'),
     path('productos_venta', login_required(views.listarProductos_venta), name='productos_venta'),
     path('index2/', views.index2, name = 'index2'),
+    path('ListarProducto',  views.listar_productos, name='listarProducto'),
+    path('solicitarproducto', views.SolicitarProducto, name='solicitarproducto'),
+    path('registrarproducto', views.RegistrarProducto, name='registrarproducto'),
     
 ]

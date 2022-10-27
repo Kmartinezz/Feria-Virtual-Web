@@ -44,8 +44,9 @@
                     <ul class="nav-menu">
                       <li class="menu-active"><a href="">Inicio</a></li>
                       <li><a href="#">Sobre Nosotros</a></li>
-                      <li><a href="{% url 'productos_venta' %}">Categorias</a></li>
-                      <li><a href="{% url 'producto' %}">Productos</a></li>
+                      <!-- <li><a href="{% url 'productos_venta' %}">Categorias</a></li> -->
+                      <li><a href="{% url 'listarProducto' %}">MarketPlace</a></li>
+                      <!-- <li><a href="{% url 'producto' %}">Productos</a></li> -->
                       <li><a href="#">Contacto</a></li>
                       <!-- <li class="menu-has-children"><a href="">Pages</a>
                         <ul>
@@ -55,6 +56,8 @@
                         </ul>
                       </li> -->
                       {% if user.is_authenticated %}
+                      <li><a href="{% url 'solicitarproducto' %}">Solicitar Producto</a></li>
+                      <li><a href="{% url 'registrarproducto' %}">Registrar Producto</a></li>
                       <li><a class="ticker-btn" href="{% url 'logout' %}">Cerrar Sesion</a></li>
                       {% else %}
                       <li><a class="ticker-btn" href="{% url 'login' %}">Inicia Sesion</a></li>
@@ -215,63 +218,11 @@
                     </div>																											
                 </div>
             </div>	
+            <br>
         </section>
         <!-- End feature-cat Area -->
         
-        <!-- Start post Area -->
-        <section class="post-area section-gap">
-            <div class="container">
-                <div class="row justify-content-center d-flex">
-                    <div class="col-lg-8 post-list">
-                        <div class="single-post d-flex flex-row">
-                            <div class="thumb">
-                                <img src="{% static 'img/post.png' %}" alt="">
-                                <ul class="tags">
-                                    <li>
-                                        <a href="#">Fruta</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="details">
-                                <div class="title d-flex flex-row justify-content-between">
-                                    <div class="titles">
-                                        <a href="single.html"><h4>Manzanas Fuji</h4></a>					
-                                    </div>
-                                    <ul class="btns">
-                                        <li><a href="#"><span class="lnr lnr-heart"></span></a></li>
-                                        <li><a href="#">Ofertar</a></li>
-                                    </ul>
-                                </div>
-                                <p>
-                                    1 Tonelada de manzanas Fuji, calidad premium
-                                </p>
-                                <h5>Job Nature: Full time</h5>
-                                <p class="address"><span class="lnr lnr-map"></span> Melipilla, Region Metropolitana</p>
-                                <p class="address"><span class="lnr lnr-database"></span> Ofertar</p>
-                            </div>
-                        </div>
-                        <a class="text-uppercase loadmore-btn mx-auto d-block" href="category.html">Cargar Mas Post</a>
-
-                    </div>
-                    <div class="col-lg-4 sidebar">
-
-                        <div class="single-slidebar">
-                            <h4>Categoria de Frutas</h4>
-                            <ul class="cat-list">
-                                <li><a class="justify-content-between d-flex" href="category.html"><p>Manzana</p></a></li>
-                                <li><a class="justify-content-between d-flex" href="category.html"><p>Peras</p></a></li>
-                                <li><a class="justify-content-between d-flex" href="category.html"><p>Sandias</p></a></li>
-                                <li><a class="justify-content-between d-flex" href="category.html"><p>Melones</p></a></li>
-                                <li><a class="justify-content-between d-flex" href="category.html"><p>Arandanos</p></a></li>
-                                <li><a class="justify-content-between d-flex" href="category.html"><p>Frambuesas</p></a></li>
-                                <li><a class="justify-content-between d-flex" href="category.html"><p>Otros</p></a></li>
-                            </ul>
-                        </div>							
-                    </div>
-                </div>
-            </div>	
-        </section>
-        <!-- End post Area -->
+    
             
 
         <!-- Start callto-action Area -->
