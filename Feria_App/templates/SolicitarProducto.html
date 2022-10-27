@@ -57,6 +57,7 @@
                         </ul>
                       </li> -->
                         {% if user.is_authenticated %}
+                        <li><a href="{% url 'listarTransporte' %}">Transportes</a></li>
                         <li><a href="{% url 'registrarproducto' %}">Registrar Producto</a></li>
                         <li><a class="ticker-btn" href="{% url 'logout' %}">Cerrar Sesion</a></li>
                         {% else %}

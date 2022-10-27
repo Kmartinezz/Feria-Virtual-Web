@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
 from django.contrib.auth import login, authenticate
 from Feria_App.forms import RegistrarForm
-from Feria_App.models import Productos, productor, ProductosVenta
+from Feria_App.models import Productos, Transporte, productor, ProductosVenta
 
 
 # Create your views here.
@@ -76,3 +76,6 @@ def listar_productos(request):
     productos = ProductosVenta.objects.all()
     return render(request, "ListarProductos.html", {"productos": productos})
 
+def listar_transporte(request):
+    transportes = Transporte.objects.all()
+    return render(request, "ListarTransporte.html", {"transportes": transportes})
