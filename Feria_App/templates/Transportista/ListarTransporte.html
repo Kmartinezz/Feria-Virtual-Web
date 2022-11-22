@@ -46,7 +46,7 @@
                     <ul class="nav-menu">
                         <li class="menu-active"><a href="{% url 'index' %}">Inicio</a></li>
                         <li><a href="#">Sobre Nosotros</a></li>
-                        <!-- <li><a href="{% url 'productos_venta' %}">Categorias</a></li> -->
+                        <li><a href="{% url 'listarProducto' %}">MarketPlace</a></li>
                         <li><a href="#">Contacto</a></li>
                         <!-- <li class="menu-has-children"><a href="">Pages</a>
                         <ul>
@@ -56,7 +56,6 @@
                         </ul>
                       </li> -->
                         {% if user.is_authenticated %}
-                        <li><a href="{% url 'listarTransporte' %}">Transportes</a></li>
                         <li><a href="{% url 'solicitarproducto' %}">Solicitar Producto</a></li>
                         <li><a href="{% url 'registrarproducto' %}">Registrar Producto</a></li>
                         <li><a class="ticker-btn" href="{% url 'logout' %}">Cerrar Sesion</a></li>
@@ -78,17 +77,17 @@
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="about-content col-lg-12">
                     <h1 class="text-white">
-                        MarketPlace
+                        Transportes
                     </h1>
                     <p class="text-white link-nav"><a href="{% url 'index' %}">Inicio </a> <span
-                            class="lnr lnr-arrow-right"></span> <a href="#"> MarketPlace</a></p>
+                            class="lnr lnr-arrow-right"></span> <a href="#"> Transportes</a></p>
                 </div>
             </div>
         </div>
     </section>
     <!-- End banner Area -->
 
-    {% for producto in productos %}
+    {% for transporte in transportes %}
     <!-- Start post Area -->
         <div class="container" style="margin-top: 30px; margin-bottom:30px;">
             <div class="row justify-content-center d-flex">
@@ -98,7 +97,7 @@
                             <div class="title d-flex flex-row justify-content-between">
                                 <div class="titles">
                                     <a href="#">
-                                        <h4><th scope="row">{{ producto.nombre }}</th></h4>
+                                        <h4><th scope="row">{{ transporte.nombre }}</th></h4>
                                     </a>
                                 </div>
                                 <ul class="btns">
@@ -107,10 +106,9 @@
                                 </ul>
                             </div>
                             <p>
-                                <th scope="row">{{ producto.solicitud }}</th>
+                                <th scope="row">{{ transporte.t_transporte }}</th>
                             </p>
-                            <th scope="row">{{ producto.comuna }}</th>
-                            <h6>Termino Oferta:</h6>
+                            <th scope="row">{{ transporte.comuna }}</th>
                             <p class="address"><span class="lnr lnr-map"></span> <th scope="row">{{ producto.cierre_oferta }}</th></p>
                         </div>
                     </div>

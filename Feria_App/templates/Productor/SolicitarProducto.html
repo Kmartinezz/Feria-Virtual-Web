@@ -46,7 +46,6 @@
                     <ul class="nav-menu">
                         <li class="menu-active"><a href="{% url 'index' %}">Inicio</a></li>
                         <li><a href="#">Sobre Nosotros</a></li>
-                        <!-- <li><a href="{% url 'productos_venta' %}">Categorias</a></li> -->
                         <li><a href="{% url 'listarProducto' %}">MarketPlace</a></li>
                         <li><a href="#">Contacto</a></li>
                         <!-- <li class="menu-has-children"><a href="">Pages</a>
@@ -58,7 +57,7 @@
                       </li> -->
                         {% if user.is_authenticated %}
                         <li><a href="{% url 'listarTransporte' %}">Transportes</a></li>
-                        <li><a href="{% url 'solicitarproducto' %}">Solicitar Producto</a></li>
+                        <li><a href="{% url 'registrarproducto' %}">Registrar Producto</a></li>
                         <li><a class="ticker-btn" href="{% url 'logout' %}">Cerrar Sesion</a></li>
                         {% else %}
                         <li><a class="ticker-btn" href="{% url 'login' %}">Inicia Sesion</a></li>
@@ -78,10 +77,10 @@
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="about-content col-lg-12">
                     <h1 class="text-white">
-                        Registrar Producto
+                        Solicitar Producto
                     </h1>
                     <p class="text-white link-nav"><a href="{% url 'index' %}">Inicio </a> <span
-                            class="lnr lnr-arrow-right"></span> <a href="#"> Registrar Producto</a></p>
+                            class="lnr lnr-arrow-right"></span> <a href="#"> Solicitar Producto</a></p>
                 </div>
             </div>
         </div>
@@ -98,7 +97,7 @@
                     <a class="contact-btns" href="#">Espera que te notifiquemos</a>
                 </div>
                 <div class="col-lg-8">
-                    <form class="form-area " id="myForm" action="mail.php" method="post"
+                    <form class="form-area " id="myForm" method="post"
                         class="contact-form text-right">
                         <div class="row">
                             <div class="col-lg-12 form-group">
@@ -115,24 +114,15 @@
                                     onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresa Tu Correo'"
                                     class="common-input mb-20 form-control" required="" type="email">
 
-                                <!-- <input name="fecha_cierre" placeholder="Fecha Termino Oferta" onfocus="this.placeholder = ''"
+                                <input name="fecha_cierre" placeholder="Fecha Termino Oferta" onfocus="this.placeholder = ''"
                                     onblur="this.placeholder = 'Fecha Termino Oferta'"
-                                    class="common-input mb-20 form-control" required="" type="date"> -->
+                                    class="common-input mb-20 form-control" required="" type="date">
 
-                                <input name="calidad" placeholder="Calidad del Producto" onfocus="this.placeholder = ''"
-                                    onblur="this.placeholder = 'Calidad del Producto'"
-                                    class="common-input mb-20 form-control" required="" type="text">
+                                <textarea class="common-textarea mt-10 form-control" name="solicitud"
+                                    placeholder="Escribe aqui lo que necesitas" onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Escribe aqui lo que necesitas'" required=""></textarea>
 
-                                <input name="cantidad" placeholder="Cantidad de Producto" onfocus="this.placeholder = ''"
-                                    onblur="this.placeholder = 'Cantidad de Producto'"
-                                    class="common-input mb-20 form-control" required="" type="number">
-
-                                <input name="oferta" placeholder="Oferta Minima" onfocus="this.placeholder = ''"
-                                    onblur="this.placeholder = 'Oferta Minima'"
-                                    class="common-input mb-20 form-control" required="" type="number">
-                                    
-
-                                <button class="primary-btn mt-20 text-white" style="float: right;">Registrar Producto</button>
+                                <button class="primary-btn mt-20 text-white" style="float: right;">Enviar Solicitud</button>
                                 <div class="mt-20 alert-msg" style="text-align: left;"></div>
                             </div>
                         </div>

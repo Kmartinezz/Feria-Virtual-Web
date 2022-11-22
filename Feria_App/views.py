@@ -1,62 +1,31 @@
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
-from Feria_App.forms import FormularioCliente, FormularioProductor
+from Feria_App.forms import FormularioCliente
 
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
 from django.contrib.auth import login, authenticate
 from Feria_App.forms import RegistrarForm
-from Feria_App.models import Productos, Transporte, productor, ProductosVenta
+from Feria_App.models import Productos, Transporte, ProductosVenta
 
 
 # Create your views here.
 def index (request):
     return render(request, 'index.html')
 
-def index2(request):
-    return render(request, 'index2.html')
-
-def SolicitarProducto(request):
-    return render(request, 'SolicitarProducto.html')
-
-def RegistrarProducto(request):
-    return render(request, 'RegistrarProducto.html')
-
 class FormularioClienteView(HttpRequest):
 
     def index(request):
         cliente = FormularioCliente()
-        return render(request,"ClienteIndex.html",{"form":cliente})
+        return render(request,"Cliente/ClienteIndex.html",{"form":cliente})
     
     def procesar_formulario(request):
         cliente = FormularioCliente(request.POST)
         if cliente.is_valid():
             cliente.save()
             cliente = FormularioCliente()
-        return render(request, "ClienteIndex.html", {"form":cliente, "mensaje": 'ok'})
-
-
-def listarProductos_venta(request):
-    producto = Productos.objects.all()
-    return render(request, 'productos_venta.html',{'producto':producto})
-
-
-class FormularioProductorView(HttpRequest):
-    def index(request):
-        productor = FormularioProductor()
-        return render(request,"productor.html",{"form":productor})
-    
-    def procesar_formulario(request):
-        productor = FormularioProductor(request.POST)
-        if productor.is_valid():
-            productor.save()
-            productor = FormularioProductor()
-        return render(request, "productor.html", {"form":productor, "mensaje": 'ok'})
-    
-    def listarProductos(request):
-        producto = productor.objects.all()
-        return render(request, 'Productos.html',{'producto':producto})
+        return render(request, "Cliente/ClienteIndex.html", {"form":cliente, "mensaje": 'ok'})
 
 def Registrar(request):
     if request.method == 'POST':
@@ -71,11 +40,17 @@ def Registrar(request):
     else:
         form = RegistrarForm()
     return render(request, 'registrar.html', {'form': form})
-    
-def listar_productos(request):
-    productos = ProductosVenta.objects.all()
-    return render(request, "ListarProductos.html", {"productos": productos})
 
-def listar_transporte(request):
+def SolicitarProducto(request):
+    return render(request, 'Productor/SolicitarProducto.html')
+
+def RegistrarProducto(request):
+    return render(request, 'Productor/RegistrarProducto.html')
+    
+def ListarProducto(request):
+    productos = ProductosVenta.objects.all()
+    return render(request, "Productor/ListarProductos.html", {"productos": productos})
+
+def ListarTransporte(request):
     transportes = Transporte.objects.all()
-    return render(request, "ListarTransporte.html", {"transportes": transportes})
+    return render(request, "Transportista/ListarTransporte.html", {"transportes": transportes})

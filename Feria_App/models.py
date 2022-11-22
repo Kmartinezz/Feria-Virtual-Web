@@ -8,7 +8,6 @@ class Cliente(models.Model):
     valor = models.CharField(max_length=20, blank=False, null=False)
 
 
-
 class productor(models.Model):
     productos = models.CharField(max_length=20, blank=False, null=False)
     precio = models.CharField(max_length=20, blank=False, null=False)
