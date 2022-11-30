@@ -38,6 +38,7 @@ class ProductosVenta(models.Model):
     solicitud = models.CharField(max_length = 200)
     cierre_oferta = models.DateField()
     comuna = models.CharField(max_length = 30)
+    correo = models.CharField(max_length = 30)
 
 class Transporte(models.Model):
     nombre = models.CharField(max_length = 75)

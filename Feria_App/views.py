@@ -41,8 +41,8 @@ def Registrar(request):
         form = RegistrarForm()
     return render(request, 'registrar.html', {'form': form})
 
-def SolicitarProducto(request):
-    return render(request, 'Productor/SolicitarProducto.html')
+""" def SolicitarProducto(request):
+    return render(request, 'Productor/SolicitarProducto.html') """
 
 def RegistrarProducto(request):
     return render(request, 'Productor/RegistrarProducto.html')
@@ -54,3 +54,16 @@ def ListarProducto(request):
 def ListarTransporte(request):
     transportes = Transporte.objects.all()
     return render(request, "Transportista/ListarTransporte.html", {"transportes": transportes})
+
+def SolicitarProducto(request):
+    if request.method == 'POST':
+        nombre = request.POST['nombre_producto']
+        solicitud = request.POST['solicitud']
+        cierre_oferta = request.POST['fecha_cierre']
+        comuna = request.POST['comuna']
+        correo = request.POST['email']
+        ProductosVenta(nombre = nombre, solicitud = solicitud, cierre_oferta = cierre_oferta, comuna = comuna, correo = correo).save()
+        return redirect('listarProducto')
+        #return render(request, 'Productor/SolicitarProducto.html')
+    else:
+        return render(request, 'Productor/SolicitarProducto.html')

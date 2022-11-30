@@ -99,6 +99,7 @@
                 <div class="col-lg-8">
                     <form class="form-area " id="myForm" method="post"
                         class="contact-form text-right">
+                        {% csrf_token %}
                         <div class="row">
                             <div class="col-lg-12 form-group">
                                 <input name="nombre_producto" placeholder="Nombre Producto" onfocus="this.placeholder = ''"
@@ -122,11 +123,12 @@
                                     placeholder="Escribe aqui lo que necesitas" onfocus="this.placeholder = ''"
                                     onblur="this.placeholder = 'Escribe aqui lo que necesitas'" required=""></textarea>
 
-                                <button class="primary-btn mt-20 text-white" style="float: right;">Enviar Solicitud</button>
+                                <button class="primary-btn mt-20 text-white" type="submit" style="float: right;">Enviar Solicitud</button>
                                 <div class="mt-20 alert-msg" style="text-align: left;"></div>
+                            </form>
                             </div>
                         </div>
-                    </form>
+                    
                 </div>
             </div>
         </div>
@@ -221,5 +223,5 @@
     <script src="{% static 'js/jquery.sticky.js' %}"></script>
     <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
     <script src="{% static 'js/parallax.min.js' %}"></script>
-    <script src="{% static 'js/mail-script.js' %}"></script>
+    <!-- <script src="{% static 'js/mail-script.js' %}"></script> -->
     <script src="{% static 'js/main.js' %}"></script>
