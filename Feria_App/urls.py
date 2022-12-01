@@ -13,6 +13,7 @@ urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='index.html'), name='logout'),
     path('ListarProducto',  views.ListarProducto, name='listarProducto'),
+    path('ListarProductoRegistro',  views.ListarProductoRegistro, name='listarProductoRegistro'),
     path('solicitarproducto', views.SolicitarProducto, name='solicitarproducto'),
     path('registrarproducto', views.RegistrarProducto, name='registrarproducto'),
     path('ListarTransporte',  views.ListarTransporte, name='listarTransporte'),

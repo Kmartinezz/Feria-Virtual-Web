@@ -99,6 +99,7 @@
                 <div class="col-lg-8">
                     <form class="form-area " id="myForm" method="post"
                         class="contact-form text-right">
+                        {% csrf_token %}
                         <div class="row">
                             <div class="col-lg-12 form-group">
                                 <input name="nombre_producto" placeholder="Nombre Producto" onfocus="this.placeholder = ''"
@@ -230,5 +231,5 @@
     <script src="{% static 'js/jquery.sticky.js' %}"></script>
     <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
     <script src="{% static 'js/parallax.min.js' %}"></script>
-    <script src="{% static 'js/mail-script.js' %}"></script>
+    <!-- <script src="{% static 'js/mail-script.js' %}"></script> -->
     <script src="{% static 'js/main.js' %}"></script>

@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+
 # Create your models here.
 class Cliente(models.Model):
     nombre = models.CharField(max_length=20, blank=False, null=False)
@@ -44,4 +45,14 @@ class Transporte(models.Model):
     nombre = models.CharField(max_length = 75)
     t_transporte = models.CharField(max_length = 75)
     comuna = models.CharField(max_length = 75)
+
+class ProductosRegistro(models.Model):
+    nombre = models.CharField(max_length = 75)
+    comuna = models.CharField(max_length = 30)
+    correo = models.CharField(max_length = 30)
+    producto = models.CharField(max_length = 100)
+    calidad = models.CharField(max_length = 30)
+    cantidad = models.CharField(max_length = 30)
+    oferta = models.CharField(max_length = 30)
+
     

@@ -7,12 +7,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
 from django.contrib.auth import login, authenticate
 from Feria_App.forms import RegistrarForm
-from Feria_App.models import Productos, Transporte, ProductosVenta
+from Feria_App.models import Productos, Transporte, ProductosVenta, ProductosRegistro
 
 
 # Create your views here.
 def index (request):
     return render(request, 'index.html')
+
 
 class FormularioClienteView(HttpRequest):
 
@@ -26,6 +27,7 @@ class FormularioClienteView(HttpRequest):
             cliente.save()
             cliente = FormularioCliente()
         return render(request, "Cliente/ClienteIndex.html", {"form":cliente, "mensaje": 'ok'})
+
 
 def Registrar(request):
     if request.method == 'POST':
@@ -41,19 +43,37 @@ def Registrar(request):
         form = RegistrarForm()
     return render(request, 'registrar.html', {'form': form})
 
-""" def SolicitarProducto(request):
-    return render(request, 'Productor/SolicitarProducto.html') """
 
 def RegistrarProducto(request):
-    return render(request, 'Productor/RegistrarProducto.html')
+    if request.method == 'POST':
+        nombre = request.POST['nombre_producto']
+        comuna = request.POST['comuna']
+        correo = request.POST['email']
+        calidad = request.POST['calidad']
+        cantidad = request.POST['cantidad']
+        oferta = request.POST['oferta']
+        ProductosRegistro(nombre = nombre, comuna = comuna, correo = correo, calidad = calidad, 
+        cantidad = cantidad, oferta = oferta).save()
+        return redirect('listarProducto')
+    else:
+        return render(request, 'Productor/RegistrarProducto.html')
+
     
 def ListarProducto(request):
     productos = ProductosVenta.objects.all()
+    pregistros = ProductosRegistro.objects.all()
     return render(request, "Productor/ListarProductos.html", {"productos": productos})
+
 
 def ListarTransporte(request):
     transportes = Transporte.objects.all()
     return render(request, "Transportista/ListarTransporte.html", {"transportes": transportes})
+    
+
+def ListarProductoRegistro(request):
+    pregistros = ProductosRegistro.objects.all()
+    return render(request, "Productor/ListarProductoRegistrado.html", {"pregistros": pregistros})
+
 
 def SolicitarProducto(request):
     if request.method == 'POST':
@@ -62,7 +82,8 @@ def SolicitarProducto(request):
         cierre_oferta = request.POST['fecha_cierre']
         comuna = request.POST['comuna']
         correo = request.POST['email']
-        ProductosVenta(nombre = nombre, solicitud = solicitud, cierre_oferta = cierre_oferta, comuna = comuna, correo = correo).save()
+        ProductosVenta(nombre = nombre, solicitud = solicitud, cierre_oferta = cierre_oferta, comuna = comuna, 
+        correo = correo).save()
         return redirect('listarProducto')
         #return render(request, 'Productor/SolicitarProducto.html')
     else:
