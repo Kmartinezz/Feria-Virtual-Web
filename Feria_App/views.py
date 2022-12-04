@@ -2,10 +2,12 @@ from django.http import HttpRequest
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from Feria_App.forms import FormularioCliente
-
+from django.template.loader import get_template
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
 from django.contrib.auth import login, authenticate
+from django.core.mail import EmailMultiAlternatives
+from django.conf import settings
 from Feria_App.forms import RegistrarForm
 from Feria_App.models import Productos, Transporte, ProductosVenta, ProductosRegistro
 
@@ -43,21 +45,6 @@ def Registrar(request):
         form = RegistrarForm()
     return render(request, 'registrar.html', {'form': form})
 
-
-def RegistrarProducto(request):
-    if request.method == 'POST':
-        nombre = request.POST['nombre_producto']
-        comuna = request.POST['comuna']
-        correo = request.POST['email']
-        calidad = request.POST['calidad']
-        cantidad = request.POST['cantidad']
-        oferta = request.POST['oferta']
-        ProductosRegistro(nombre = nombre, comuna = comuna, correo = correo, calidad = calidad, 
-        cantidad = cantidad, oferta = oferta).save()
-        return redirect('listarProducto')
-    else:
-        return render(request, 'Productor/RegistrarProducto.html')
-
     
 def ListarProducto(request):
     productos = ProductosVenta.objects.all()
@@ -84,7 +71,53 @@ def SolicitarProducto(request):
         correo = request.POST['email']
         ProductosVenta(nombre = nombre, solicitud = solicitud, cierre_oferta = cierre_oferta, comuna = comuna, 
         correo = correo).save()
+        EnvioCorreoSolicitud(nombre, solicitud, cierre_oferta, comuna, correo)
         return redirect('listarProducto')
-        #return render(request, 'Productor/SolicitarProducto.html')
     else:
         return render(request, 'Productor/SolicitarProducto.html')
+
+def RegistrarProducto(request):
+    if request.method == 'POST':
+        nombre = request.POST['nombre_producto']
+        comuna = request.POST['comuna']
+        correo = request.POST['email']
+        calidad = request.POST['calidad']
+        cantidad = request.POST['cantidad']
+        oferta = request.POST['oferta']
+        producto = request.POST['producto']
+        ProductosRegistro(nombre = nombre, comuna = comuna, correo = correo, calidad = calidad, 
+        cantidad = cantidad, oferta = oferta, producto = producto).save()
+        EnvioCorreoRegistro(nombre, comuna, correo, calidad, cantidad, oferta, producto)
+        return redirect('listarProductoRegistro')
+    else:
+        return render(request, 'Productor/RegistrarProducto.html')
+
+
+def EnvioCorreoRegistro(nombre, comuna, correo, calidad, cantidad, oferta, producto):
+    #Con esta linea de abajo podemos llamar los datos que necesitamos, debemos hacer lo mismo para los demas datos
+    context = {'correo' : correo, 'comuna' : comuna, 'nombre' : nombre, 'calidad' : calidad, 'cantidad' : cantidad, 'oferta' : oferta, 'producto' : producto}
+    template = get_template('Correo/CorreoRegistroProducto.html')
+    content = template.render(context)
+
+    email = EmailMultiAlternatives(
+        'Correo de Prueba',
+        'Feria Virtual',
+        settings.EMAIL_HOST_USER,
+        [correo]
+    )
+    email.attach_alternative(content, 'text/html')
+    email.send()
+
+def EnvioCorreoSolicitud(nombre, solicitud, cierre_oferta, comuna, correo):
+    context = {'nombre' : nombre, 'solicitud' : solicitud, 'cierre_oferta' : cierre_oferta, 'comuna' : comuna, 'correo' : correo}
+    template = get_template('Correo/CorreoSolicitudProducto.html')
+    content = template.render(context)
+
+    email = EmailMultiAlternatives(
+        'Correo de Prueba',
+        'Feria Virtual',
+        settings.EMAIL_HOST_USER,
+        [correo]
+    )
+    email.attach_alternative(content, 'text/html')
+    email.send()
