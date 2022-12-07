@@ -1,0 +1,222 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Manetendor</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'css/Mantenedor.css' %}">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container-xl">
+	<div class="table-responsive">
+		<div class="table-wrapper">
+			<div class="table-title">
+				<div class="row">
+					<div class="col-sm-6">
+						<h2>Mantenedor <b>Registro Producto</b></h2>
+					</div>
+					<div class="col-sm-6">
+						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar Registro Producto</span></a>				
+					</div>
+				</div>
+			</div>
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Registra</th>
+						<th>Nombre Persona</th>
+						<th>RUT</th>
+                        <th>Teléfono</th>
+						<th>Comuna</th>
+						<th>Correo</th>
+						<th>Producto</th>
+						<th>Calidad</th>
+                        <th>Cantidad</th>
+                        <th>Oferta</th>
+					</tr>
+				</thead>
+				{% for pregistro in pregistros %}
+				<tbody>
+					<tr>
+						<td scope="row">{{ pregistro.nombre }}</td>
+						<td scope="row">{{ pregistro.nombre_persona }}</td>
+						<td scope="row">{{ pregistro.rut }}</td>
+                        <td scope="row">{{ pregistro.telefono }}</td>
+						<td scope="row">{{ pregistro.comuna }}</td>
+						<td scope="row">{{ pregistro.correo }}</td>
+						<td scope="row">{{ pregistro.producto }}</td>
+                        <td scope="row">{{ pregistro.calidad }}</td>
+						<td scope="row">{{ pregistro.cantidad }}</td>
+                        <td scope="row">{{ pregistro.oferta }}</td>
+						<td>
+							<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+							<a href="{% url 'EliminarRegistroProducto' pregistro.id %}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+						</td>
+					</tr>
+				</tbody>
+				{% endfor %}
+			</table>
+			<div class="clearfix">
+				<div class="hint-text"><a href="{% url 'Administrador' %}"> Volver</a></div>
+
+			</div>
+		</div>
+	</div>        
+</div>
+<!-- Edit Modal HTML -->
+<div id="addEmployeeModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form method="post">
+				{% csrf_token %}
+				<div class="modal-header">						
+					<h4 class="modal-title">Agregar Solicitud Producto</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">					
+					<div class="form-group">
+						<label>Registra</label>
+						<input type="text" class="form-control" required name="nombre_producto">
+					</div>
+					<div class="form-group">
+						<label>Nombre Persona</label>
+						<input type="text" class="form-control" required name="nombre_persona">
+					</div>
+					<div class="form-group">
+						<label>RUT</label>
+						<input type="text" class="form-control" required name="rut">
+					</div>
+					<div class="form-group">
+						<label>Teléfono</label>
+						<input type="text" class="form-control" required name="telefono">
+					</div>
+                    <div class="form-group">
+						<label>Comuna</label>
+						<input type="text" class="form-control" required name="comuna">
+					</div>
+					<div class="form-group">
+						<label>Correo</label>
+						<input type="email" class="form-control" required name="email">
+					</div>		
+                    <div class="form-group">
+                        <label>Producto</label>
+                        <input type="text" class="form-control" required name="producto">
+                    </div>
+                    <div class="form-group">
+                        <label>Calidad</label>
+                        <input type="text" class="form-control" required name="calidad">
+                    </div>	
+                    <div class="form-group">
+                        <label>Cantidad</label>
+                        <input type="text" class="form-control" required name="cantidad">
+                    </div>	
+                    <div class="form-group">
+                        <label>Oferta</label>
+                        <input type="text" class="form-control" required name="oferta">
+                    </div>				
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+					<input type="submit" class="btn btn-success" value="Agregar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- Edit Modal HTML -->
+<div id="editEmployeeModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form>
+				<div class="modal-header">						
+					<h4 class="modal-title">Editar Transporte</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">					
+					<div class="form-group">
+						<label>Registra</label>
+						<input type="text" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label>Nombre Persona</label>
+						<input type="text" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label>RUT</label>
+						<input type="text" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label>Teléfono</label>
+						<input type="text" class="form-control" required>
+					</div>
+                    <div class="form-group">
+						<label>Comuna</label>
+						<input type="text" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label>Correo</label>
+						<input type="email" class="form-control" required>
+					</div>		
+                    <div class="form-group">
+                        <label>Producto</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Calidad</label>
+                        <input type="text" class="form-control" required>
+                    </div>	
+                    <div class="form-group">
+                        <label>Cantidad</label>
+                        <input type="text" class="form-control" required>
+                    </div>	
+                    <div class="form-group">
+                        <label>Oferta</label>
+                        <input type="text" class="form-control" required>
+                    </div>				
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Canelar">
+					<input type="submit" class="btn btn-info" value="Guardar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- Delete Modal HTML -->
+</body>
+<script>
+	$(document).ready(function(){
+		// Activate tooltip
+		$('[data-toggle="tooltip"]').tooltip();
+		
+		// Select/Deselect checkboxes
+		var checkbox = $('table tbody input[type="checkbox"]');
+		$("#selectAll").click(function(){
+			if(this.checked){
+				checkbox.each(function(){
+					this.checked = true;                        
+				});
+			} else{
+				checkbox.each(function(){
+					this.checked = false;                        
+				});
+			} 
+		});
+		checkbox.click(function(){
+			if(!this.checked){
+				$("#selectAll").prop("checked", false);
+			}
+		});
+	});
+	</script>
+
+</html>

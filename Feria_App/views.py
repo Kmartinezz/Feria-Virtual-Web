@@ -11,10 +11,120 @@ from django.conf import settings
 from Feria_App.forms import RegistrarForm
 from Feria_App.models import Productos, Transporte, ProductosVenta, ProductosRegistro
 
+#
+#
+#
+#
+#FALTA REALIZAR EL UPDATE DE DATOS EN LOS CRUD
+#
+#
+#
 
 # Create your views here.
-def index (request):
+def index(request):
     return render(request, 'index.html')
+
+#-------------------------------------------ADMINISTRADOR VIEWS-------------------------------------------
+
+def Administrador(request):
+    return render(request, 'Administrador/Administrador.html')
+
+
+#-------------------------------------------RegistroProducto VIEWS-------------------------------------------
+
+def CrudRegistroProducto(request):
+    if request.method == 'POST':
+        nombre = request.POST['nombre_producto']
+        nombre_persona = request.POST['nombre_persona']
+        rut = request.POST['rut']
+        telefono = request.POST['telefono']
+        comuna = request.POST['comuna']
+        correo = request.POST['email']
+        producto = request.POST['producto']
+        calidad = request.POST['calidad']
+        cantidad = request.POST['cantidad']
+        oferta = request.POST['oferta']
+
+        ProductosRegistro(nombre = nombre, nombre_persona = nombre_persona, rut = rut, telefono = telefono, 
+        comuna = comuna, correo = correo, calidad = calidad, cantidad = cantidad, oferta = oferta, producto = producto).save()
+        return redirect('CrudRegistroProducto')
+    else:
+        #READ
+        pregistros = ProductosRegistro.objects.all()
+        return render(request, "Administrador/Crud-RegistroProducto.html", {"pregistros": pregistros})
+
+    #UPDATE
+    #-----Update here-----
+
+def EliminarRegistroProducto(request, id):
+    pregistros = ProductosRegistro.objects.get(id = id)
+    pregistros.delete()
+    return redirect('CrudSolicitudProducto')
+
+
+#-------------------------------------------SolicitudProducto VIEWS-------------------------------------------    
+
+def CrudSolicitudProducto(request):
+    #CREATE
+    if request.method == 'POST':
+        nombre = request.POST['nombre_producto']
+        nombre_persona = request.POST['nombre_persona']
+        rut = request.POST['rut']
+        telefono = request.POST['telefono']
+        solicitud = request.POST['solicitud']
+        cierre_oferta = request.POST['fecha_cierre']
+        comuna = request.POST['comuna']
+        correo = request.POST['email']
+
+        ProductosVenta(nombre = nombre, nombre_persona = nombre_persona, rut = rut, telefono = telefono, 
+        solicitud = solicitud, cierre_oferta = cierre_oferta, comuna = comuna, correo = correo).save()
+        #EnvioCorreoSolicitud(nombre, solicitud, cierre_oferta, comuna, correo)
+        return redirect('CrudRegistroProducto')
+    else:
+        #READ
+        productos = ProductosVenta.objects.all()
+        return render(request, "Administrador/Crud-SolicitudProducto.html", {"productos": productos})
+
+    #UPDATE
+    #-----Update here-----
+
+def EliminarSolicitudProducto(request, id):
+    productos = ProductosVenta.objects.get(id = id)
+    productos.delete()
+    return redirect('CrudSolicitudProducto')
+
+
+#-------------------------------------------Trasnporte VIEWS-------------------------------------------    
+
+def CrudTransporte(request):
+
+    #CREATE
+    if request.method == 'POST':
+        nombre = request.POST['nombre_transporte']
+        nombre_persona = request.POST['nombre_persona']
+        rut = request.POST['rut']
+        telefono = request.POST['telefono']
+        t_transporte = request.POST['t_transporte']
+        patente = request.POST['patente']
+        correo = request.POST['email']
+        comuna = request.POST['comuna']
+
+        Transporte(nombre = nombre, nombre_persona = nombre_persona, rut = rut, telefono = telefono,
+        t_transporte = t_transporte, patente = patente, correo = correo, comuna = comuna).save()
+        return redirect('CrudTransporte')
+
+    #UPDATE
+    #-----Update here-----
+
+    #READ
+    elif request.method != 'POST':
+        transportes = Transporte.objects.all()
+        return render(request, "Administrador/Crud-Transporte.html", {"transportes": transportes})
+    
+def EliminarTransporte(request, id):
+    transporte = Transporte.objects.get(id = id)
+    transporte.delete()
+    return redirect('CrudTransporte')
 
 
 class FormularioClienteView(HttpRequest):
@@ -48,7 +158,6 @@ def Registrar(request):
     
 def ListarProducto(request):
     productos = ProductosVenta.objects.all()
-    pregistros = ProductosRegistro.objects.all()
     return render(request, "Productor/ListarProductos.html", {"productos": productos})
 
 
@@ -92,6 +201,8 @@ def RegistrarProducto(request):
     else:
         return render(request, 'Productor/RegistrarProducto.html')
 
+
+#-------------------------------------------Correo VIEWS-------------------------------------------    
 
 def EnvioCorreoRegistro(nombre, comuna, correo, calidad, cantidad, oferta, producto):
     #Con esta linea de abajo podemos llamar los datos que necesitamos, debemos hacer lo mismo para los demas datos

@@ -36,6 +36,9 @@ class Productos(models.Model):
 
 class ProductosVenta(models.Model):
     nombre = models.CharField(max_length = 75)
+    nombre_persona = models.CharField(max_length = 30)
+    rut = models.CharField(max_length = 15)
+    telefono = models.CharField(max_length = 15)
     solicitud = models.CharField(max_length = 200)
     cierre_oferta = models.DateField()
     comuna = models.CharField(max_length = 30)
@@ -43,11 +46,19 @@ class ProductosVenta(models.Model):
 
 class Transporte(models.Model):
     nombre = models.CharField(max_length = 75)
+    nombre_persona = models.CharField(max_length = 30)
+    rut = models.CharField(max_length = 15)
+    telefono = models.CharField(max_length = 15)
     t_transporte = models.CharField(max_length = 75)
+    patente = models.CharField(max_length = 10)
+    correo = models.CharField(max_length = 30)
     comuna = models.CharField(max_length = 75)
 
 class ProductosRegistro(models.Model):
     nombre = models.CharField(max_length = 75)
+    nombre_persona = models.CharField(max_length = 30)
+    rut = models.CharField(max_length = 15)
+    telefono = models.CharField(max_length = 15)
     comuna = models.CharField(max_length = 30)
     correo = models.CharField(max_length = 30)
     producto = models.CharField(max_length = 100)

@@ -56,13 +56,13 @@
                         </ul>
                       </li> -->
                       {% if user.is_authenticated %}
-                      <li><a href="{% url 'listarTransporte' %}">Transportes</a></li>
-                      <li><a href="{% url 'solicitarproducto' %}">Solicitar Producto</a></li>
-                      <li><a href="{% url 'registrarproducto' %}">Registrar Producto</a></li>
-                      <li><a class="ticker-btn" href="{% url 'logout' %}">Cerrar Sesion</a></li>
+                        <li><a href="{% url 'listarTransporte' %}">Transportes</a></li>
+                        <li><a href="{% url 'solicitarproducto' %}">Solicitar Producto</a></li>
+                        <li><a href="{% url 'registrarproducto' %}">Registrar Producto</a></li>
+                        <li><a class="ticker-btn" href="{% url 'logout' %}">Cerrar Sesion</a></li>
                       {% else %}
-                      <li><a class="ticker-btn" href="{% url 'login' %}">Inicia Sesion</a></li>
-                      <li><a class="ticker-btn" href="{% url 'registrar' %}">Registrate</a></li>
+                        <li><a class="ticker-btn" href="{% url 'login' %}">Inicia Sesion</a></li>
+                        <li><a class="ticker-btn" href="{% url 'registrar' %}">Registrate</a></li>
                       {% endif %}
                       
                     </ul>
