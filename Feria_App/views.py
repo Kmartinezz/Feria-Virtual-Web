@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
 from django.contrib.auth import login, authenticate
 from django.core.mail import EmailMultiAlternatives
+from .forms import TransporteForm
 from django.conf import settings
 from Feria_App.forms import RegistrarForm
 from Feria_App.models import Productos, Transporte, ProductosVenta, ProductosRegistro
@@ -35,7 +36,7 @@ def Administrador(request):
 def CrudRegistroProducto(request):
     if request.method == 'POST':
         nombre = request.POST['nombre_producto']
-        nombre_persona = request.POST['nombre_persona']
+        nombre_persona_pr = request.POST['nombre_persona']
         rut = request.POST['rut']
         telefono = request.POST['telefono']
         comuna = request.POST['comuna']
@@ -45,7 +46,7 @@ def CrudRegistroProducto(request):
         cantidad = request.POST['cantidad']
         oferta = request.POST['oferta']
 
-        ProductosRegistro(nombre = nombre, nombre_persona = nombre_persona, rut = rut, telefono = telefono, 
+        ProductosRegistro(nombre = nombre, nombre_persona_pr = nombre_persona_pr, rut = rut, telefono = telefono, 
         comuna = comuna, correo = correo, calidad = calidad, cantidad = cantidad, oferta = oferta, producto = producto).save()
         return redirect('CrudRegistroProducto')
     else:
@@ -53,13 +54,27 @@ def CrudRegistroProducto(request):
         pregistros = ProductosRegistro.objects.all()
         return render(request, "Administrador/Crud-RegistroProducto.html", {"pregistros": pregistros})
 
-    #UPDATE
-    #-----Update here-----
+def EditarRegistroProducto(request, id):
+    if request.method == 'POST':
+        nombre = request.POST['nombre_producto']
+        nombre_persona_pr = request.POST['nombre_persona']
+        rut = request.POST['rut']
+        telefono = request.POST['telefono']
+        comuna = request.POST['comuna']
+        correo = request.POST['email']
+        producto = request.POST['producto']
+        calidad = request.POST['calidad']
+        cantidad = request.POST['cantidad']
+        oferta = request.POST['oferta']
+
+        ProductosRegistro.objects.filter(id=id).update(nombre = nombre, nombre_persona_pr = nombre_persona_pr, rut = rut, telefono = telefono, 
+        comuna = comuna, correo = correo, calidad = calidad, cantidad = cantidad, oferta = oferta, producto = producto)
+        return redirect('CrudRegistroProducto')
 
 def EliminarRegistroProducto(request, id):
     pregistros = ProductosRegistro.objects.get(id = id)
     pregistros.delete()
-    return redirect('CrudSolicitudProducto')
+    return redirect('CrudRegistroProducto')
 
 
 #-------------------------------------------SolicitudProducto VIEWS-------------------------------------------    
@@ -68,7 +83,7 @@ def CrudSolicitudProducto(request):
     #CREATE
     if request.method == 'POST':
         nombre = request.POST['nombre_producto']
-        nombre_persona = request.POST['nombre_persona']
+        nombre_persona_ps = request.POST['nombre_persona']
         rut = request.POST['rut']
         telefono = request.POST['telefono']
         solicitud = request.POST['solicitud']
@@ -76,17 +91,29 @@ def CrudSolicitudProducto(request):
         comuna = request.POST['comuna']
         correo = request.POST['email']
 
-        ProductosVenta(nombre = nombre, nombre_persona = nombre_persona, rut = rut, telefono = telefono, 
+        ProductosVenta(nombre = nombre, nombre_persona_ps = nombre_persona_ps, rut = rut, telefono = telefono, 
         solicitud = solicitud, cierre_oferta = cierre_oferta, comuna = comuna, correo = correo).save()
         #EnvioCorreoSolicitud(nombre, solicitud, cierre_oferta, comuna, correo)
-        return redirect('CrudRegistroProducto')
+        return redirect('CrudSolicitudProducto')
     else:
         #READ
         productos = ProductosVenta.objects.all()
         return render(request, "Administrador/Crud-SolicitudProducto.html", {"productos": productos})
 
-    #UPDATE
-    #-----Update here-----
+def EditarSolicitudProducto(request, id):
+    if request.method == 'POST':
+        nombre = request.POST['nombre_producto']
+        nombre_persona_ps = request.POST['nombre_persona']
+        rut = request.POST['rut']
+        telefono = request.POST['telefono']
+        solicitud = request.POST['solicitud']
+        cierre_oferta = request.POST['fecha_cierre']
+        comuna = request.POST['comuna']
+        correo = request.POST['email']
+
+        ProductosVenta.objects.filter(id=id).update(nombre = nombre, nombre_persona_ps = nombre_persona_ps, rut = rut, telefono = telefono, 
+        solicitud = solicitud, cierre_oferta = cierre_oferta, comuna = comuna, correo = correo)
+        return redirect('CrudSolicitudProducto')
 
 def EliminarSolicitudProducto(request, id):
     productos = ProductosVenta.objects.get(id = id)
@@ -101,7 +128,7 @@ def CrudTransporte(request):
     #CREATE
     if request.method == 'POST':
         nombre = request.POST['nombre_transporte']
-        nombre_persona = request.POST['nombre_persona']
+        nombre_persona_t = request.POST['nombre_persona']
         rut = request.POST['rut']
         telefono = request.POST['telefono']
         t_transporte = request.POST['t_transporte']
@@ -109,17 +136,30 @@ def CrudTransporte(request):
         correo = request.POST['email']
         comuna = request.POST['comuna']
 
-        Transporte(nombre = nombre, nombre_persona = nombre_persona, rut = rut, telefono = telefono,
+        Transporte(nombre = nombre, nombre_persona_t = nombre_persona_t, rut = rut, telefono = telefono,
         t_transporte = t_transporte, patente = patente, correo = correo, comuna = comuna).save()
         return redirect('CrudTransporte')
-
-    #UPDATE
-    #-----Update here-----
 
     #READ
     elif request.method != 'POST':
         transportes = Transporte.objects.all()
         return render(request, "Administrador/Crud-Transporte.html", {"transportes": transportes})
+
+
+def EditarTransporte(request, id):
+    if request.method == 'POST':
+        nombre = request.POST['nombre_transporte']
+        nombre_persona_t = request.POST['nombre_persona']
+        rut = request.POST['rut']
+        telefono = request.POST['telefono']
+        t_transporte = request.POST['t_transporte']
+        patente = request.POST['patente']
+        correo = request.POST['email']
+        comuna = request.POST['comuna']
+
+        Transporte.objects.filter(id = id).update(nombre = nombre, nombre_persona_t = nombre_persona_t, rut = rut, telefono = telefono,
+        t_transporte = t_transporte, patente = patente, correo = correo, comuna = comuna)
+        return redirect('CrudTransporte')
     
 def EliminarTransporte(request, id):
     transporte = Transporte.objects.get(id = id)
@@ -174,12 +214,16 @@ def ListarProductoRegistro(request):
 def SolicitarProducto(request):
     if request.method == 'POST':
         nombre = request.POST['nombre_producto']
+        nombre_persona_ps = request.POST['nombre_persona']
+        rut = request.POST['rut']
+        telefono = request.POST['telefono']
         solicitud = request.POST['solicitud']
         cierre_oferta = request.POST['fecha_cierre']
         comuna = request.POST['comuna']
         correo = request.POST['email']
-        ProductosVenta(nombre = nombre, solicitud = solicitud, cierre_oferta = cierre_oferta, comuna = comuna, 
-        correo = correo).save()
+
+        ProductosVenta(nombre = nombre, nombre_persona_ps = nombre_persona_ps, rut = rut, telefono = telefono, 
+        solicitud = solicitud, cierre_oferta = cierre_oferta, comuna = comuna, correo = correo).save()
         EnvioCorreoSolicitud(nombre, solicitud, cierre_oferta, comuna, correo)
         return redirect('listarProducto')
     else:
@@ -188,14 +232,18 @@ def SolicitarProducto(request):
 def RegistrarProducto(request):
     if request.method == 'POST':
         nombre = request.POST['nombre_producto']
+        nombre_persona_pr = request.POST['nombre_persona']
+        rut = request.POST['rut']
+        telefono = request.POST['telefono']
         comuna = request.POST['comuna']
         correo = request.POST['email']
+        producto = request.POST['producto']
         calidad = request.POST['calidad']
         cantidad = request.POST['cantidad']
         oferta = request.POST['oferta']
-        producto = request.POST['producto']
-        ProductosRegistro(nombre = nombre, comuna = comuna, correo = correo, calidad = calidad, 
-        cantidad = cantidad, oferta = oferta, producto = producto).save()
+
+        ProductosRegistro(nombre = nombre, nombre_persona_pr = nombre_persona_pr, rut = rut, telefono = telefono, 
+        comuna = comuna, correo = correo, calidad = calidad, cantidad = cantidad, oferta = oferta, producto = producto).save()
         EnvioCorreoRegistro(nombre, comuna, correo, calidad, cantidad, oferta, producto)
         return redirect('listarProductoRegistro')
     else:

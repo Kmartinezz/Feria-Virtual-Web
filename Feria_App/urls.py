@@ -34,6 +34,10 @@ urlpatterns = [
 
     path('eliminarTransporte/<int:id>', views.EliminarTransporte, name = 'EliminarTransporte'),
     path('eliminarSolicitudProducto/<int:id>', views.EliminarSolicitudProducto, name = 'EliminarSolicitudProducto'),
-    path('eliminarRegistroProducto/<int:id>', views.EliminarRegistroProducto, name = 'EliminarRegistroProducto')
+    path('eliminarRegistroProducto/<int:id>', views.EliminarRegistroProducto, name = 'EliminarRegistroProducto'),
+
+    path('editarTransporte/<int:id>', views.EditarTransporte, name = 'EditarTransporte'),
+    path('editarSolicitudProducto/<int:id>', views.EditarSolicitudProducto, name = 'EditarSolicitudProducto'),
+    path('editarRegistroProducto/<int:id>', views.EditarRegistroProducto, name = 'EditarRegistroProducto'),
     
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
