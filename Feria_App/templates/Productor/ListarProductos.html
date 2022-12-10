@@ -1,74 +1,6 @@
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
-
-<head>
-    <!-- Mobile Specific Meta -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="{% static '/img/fav.png' %}">
-    <!-- Author Meta -->
-    <meta name="author" content="codepixer">
-    <!-- Meta Description -->
-    <meta name="description" content="">
-    <!-- Meta Keyword -->
-    <meta name="keywords" content="">
-    <!-- meta character set -->
-    <meta charset="UTF-8">
-    <!-- Site Title -->
-    <title>Feria Virtual</title>
-    <link rel="website icon" type="png" href="{% static 'img/minilogo.jpg' %}">
-
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
-    <!--
-        CSS
-        ============================================= -->
-    <link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
-    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
-    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
-    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-</head>
-
-<body>
-
-    <header id="header" id="home">
-        <div class="container">
-            <div class="row align-items-center justify-content-between d-flex">
-                <div id="logo">
-                    <!-- <a href="index.html"><img src="{% static 'img/logo.png' %}" alt="" title="" /></a> -->
-                    <a> Logo </a>
-                </div>
-                <nav id="nav-menu-container">
-                    <ul class="nav-menu">
-                        <li class="menu-active"><a href="{% url 'index' %}">Inicio</a></li>
-                        <li><a href="#">Sobre Nosotros</a></li>
-                        <li><a href="#">Contacto</a></li>
-                        <!-- <li class="menu-has-children"><a href="">Pages</a>
-                        <ul>
-                            <li><a href="elements.html">elements</a></li>
-                            <li><a href="search.html">search</a></li>
-                            <li><a href="single.html">single</a></li>
-                        </ul>
-                      </li> -->
-                        {% if user.is_authenticated %}
-                        <li><a href="{% url 'listarTransporte' %}">Transportes</a></li>
-                        <li><a href="{% url 'solicitarproducto' %}">Solicitar Producto</a></li>
-                        <li><a href="{% url 'registrarproducto' %}">Registrar Producto</a></li>
-                        <li><a class="ticker-btn" href="{% url 'logout' %}">Cerrar Sesion</a></li>
-                        {% else %}
-                        <li><a class="ticker-btn" href="{% url 'login' %}">Inicia Sesion</a></li>
-                        <li><a class="ticker-btn" href="{% url 'registrar' %}">Registrate</a></li>
-                        {% endif %}
-
-                    </ul>
-                </nav><!-- #nav-menu-container -->
-            </div>
-        </div>
-    </header><!-- #header -->
 
     <!-- start banner Area -->
     <section class="banner-area relative" id="home">
@@ -105,7 +37,6 @@
                             </div>
                             <ul class="btns">
                                 <li><a href="#"><span class="lnr lnr-heart"></span></a></li>
-                                <li><a href="#">Ofertar</a></li>
                             </ul>
                         </div>
                         <p>
@@ -195,6 +126,7 @@
             </div>
         </div>
     </div>
+    {% endblock %}
 </footer>
 <!-- End footer Area -->
 

@@ -26,18 +26,23 @@ urlpatterns = [
     path('registrarproducto', views.RegistrarProducto, name = 'registrarproducto'),
     path('ListarTransporte',  views.ListarTransporte, name = 'listarTransporte'),
 
+    #Subastas
+
     #Administrador
     path('Administrador', views.Administrador, name = 'Administrador'),
     path('CrudRegistroProducto', views.CrudRegistroProducto, name = 'CrudRegistroProducto'),
     path('CrudSolicitudProducto', views.CrudSolicitudProducto, name = 'CrudSolicitudProducto'),
     path('CrudTransporte', views.CrudTransporte, name = 'CrudTransporte'),
+    path('CrudContrato', views.CrudContrato, name = 'CrudContrato'),
 
     path('eliminarTransporte/<int:id>', views.EliminarTransporte, name = 'EliminarTransporte'),
     path('eliminarSolicitudProducto/<int:id>', views.EliminarSolicitudProducto, name = 'EliminarSolicitudProducto'),
     path('eliminarRegistroProducto/<int:id>', views.EliminarRegistroProducto, name = 'EliminarRegistroProducto'),
+    path('eliminarContrato/<int:id>', views.EliminarContrato, name = 'EliminarContrato'),
 
     path('editarTransporte/<int:id>', views.EditarTransporte, name = 'EditarTransporte'),
     path('editarSolicitudProducto/<int:id>', views.EditarSolicitudProducto, name = 'EditarSolicitudProducto'),
     path('editarRegistroProducto/<int:id>', views.EditarRegistroProducto, name = 'EditarRegistroProducto'),
+    path('editarContrato/<int:id>', views.EditarContrato, name = 'EditarContrato'),
     
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
