@@ -51,6 +51,7 @@ class Transporte(models.Model):
     telefono = models.CharField(max_length = 15)
     t_transporte = models.CharField(max_length = 75)
     patente = models.CharField(max_length = 10)
+    capacidad = models.CharField(max_length = 30)
     correo = models.CharField(max_length = 30)
     comuna = models.CharField(max_length = 75)
 
@@ -63,7 +64,7 @@ class ProductosRegistro(models.Model):
     correo = models.CharField(max_length = 30)
     producto = models.CharField(max_length = 100)
     calidad = models.CharField(max_length = 30)
-    cantidad = models.CharField(max_length = 30)
-    oferta = models.CharField(max_length = 30)
+    cantidad = models.IntegerField()
+    oferta = models.IntegerField()
 
     

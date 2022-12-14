@@ -40,6 +40,7 @@
 						<th>Teléfono</th>
 						<th>Tipo Transporte</th>
 						<th>Patente</th>
+						<th>Capacidad</th>
 						<th>Correo</th>
 						<th>Comuna</th>
 					</tr>
@@ -53,6 +54,7 @@
 						<td scope="row">{{ transporte.telefono }}</td>
 						<td scope="row">{{ transporte.t_transporte }}</td>
 						<td scope="row">{{ transporte.patente }}</td>
+						<td scope="row">{{ transporte.capacidad }}</td>
 						<td scope="row">{{ transporte.correo }}</td>
 						<td scope="row">{{ transporte.comuna }}</td>
 						<td>
@@ -109,6 +111,10 @@
 						<input type="text" class="form-control" required name="patente">
 					</div>
 					<div class="form-group">
+						<label>Capacidad</label>
+						<input type="text" class="form-control" required name="capacidad">
+					</div>
+					<div class="form-group">
 						<label>Correo</label>
 						<input type="email" class="form-control" required name="email">
 					</div>
@@ -161,6 +167,10 @@
 					<div class="form-group">
 						<label>Patente</label>
 						<input type="text" class="form-control" required name="patente">
+					</div>
+					<div class="form-group">
+						<label>Capacidad</label>
+						<input type="text" class="form-control" required name="capacidad">
 					</div>
 					<div class="form-group">
 						<label>Correo</label>
